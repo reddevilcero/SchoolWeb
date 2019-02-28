@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load  static %}
+{% block title %}Clubs{% endblock %}
+{% block container %}
+
+  <!--=========== BEGIN COURSE BANNER SECTION ================-->
+  <section id="imgBanner">
+    <h2>Our Club Offer</h2>
+  </section>
+  <!--=========== END COURSE BANNER SECTION ================-->
+
+  <!--=========== BEGIN COURSE BANNER SECTION ================-->
+  <section id="courseArchive">
+    <div class="container">
+      <div class="row">
+        <!-- start course content -->
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="courseArchive_content">
+              <div class="row">
+                {% for file in files_list %}
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                  <div class="single_course wow fadeInUp">
+                    <div class="singCourse_imgarea">
+                      <img src={% static 'core/img/defaults/pdf.svg' %}/>
+                      <div class="mask">                         
+                        <a href={% url 'file' file.id file.title|slugify %} class="course_more" target='_blank'>View File</a>
+                      </div>
+                    </div>
+                      <div class="singCourse_content">
+                        <h3 id='file' class="singCourse_title"><a href="#">{{file.title}}</a></h3>
+                        <p class="singCourse_price">Uploaded by <span>{{file.author}}</span></p>
+                        <p class="singCourse_price">Published on <br><span>{{file.published|date:'dS M Y'}}</span></p>
+                      </div>
+                     
+
+                    
+                  </div>    
+                </div>    
+              
+                {% endfor %}              
+              </div>
+            </div>
+          </div>         
+        <!-- End course content -->
+      </div>
+    </div>
+  </section>
+  <!--=========== END COURSE BANNER SECTION ================-->
+{% endblock %}

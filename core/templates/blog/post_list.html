@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block container %}
+
+<!--=========== BEGIN COURSE BANNER SECTION ================-->
+  <section id="imgBanner">
+    <h2>BlogV2 Archive</h2>
+  </section>
+<!--=========== END COURSE BANNER SECTION ================-->
+
+<!--=========== BEGIN COURSE BANNER SECTION ================-->
+    <section id="courseArchive">
+      <div class="container">
+        <div class="row">
+          <!-- start course content -->
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="courseArchive_content">
+              <!-- start blog archive  -->
+              <div class="row">
+                {% for post in post_list %}
+                <!-- start single blog archive -->
+                <div class="col-lg-12 col-12 col-sm-12">
+                  <div class="single_blog_archive wow fadeInUp">
+                    <div class="blogimg_container">
+                      <a href="{% url 'post' post.id post.title|slugify %}" class="blog_img">
+                      {% if post.image %}
+                        <img alt="img" src="{{post.image.url}}">
+                      {% else %}
+                        <img alt="img" src={% static 'core/img/default_blog.jpg' %}>
+                      {% endif %}
+                      </a>
+                    </div>
+                    <h2 class="blog_title"><a href="{% url 'post' post.id post.title|slugify %}">{{post.title}}</a></h2>
+                    <div class="blog_commentbox">
+                      <p><i class="fa fa-user"></i>{{post.author}}</p>
+                      <p><i class="fa fa-calendar"></i>{{post.published|date:"D d F Y"}}</p>
+                      {% for category in post.categories.all %}
+                        <p><a href="{% url 'category' category.id category|slugify %}"><i class="fa fa-tags"></i>{{category.name}}</a></p>
+                      {% endfor %}
+                      
+                    </div>
+                    <p class="blog_summary">{{post.content|safe|truncatewords:"40"}}...</p>
+                    <a class="blog_readmore" href="{% url 'post' post.id post.title|slugify %}">Read More</a>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <!-- end blog archive  -->
+              {% if is_paginated %}
+                <nav>
+                  <ul class="pagination wow fadeInLeft">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                      {% if posts.number == i %}
+                        <li class='active'><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if posts.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              {% endif %}
+            </div>
+          </div>
+          <!-- End course content -->
+
+          <!-- start course archive sidebar -->
+            {% include "includes/sidebar.html" %}
+          <!-- start course archive sidebar -->
+        </div>
+      </div>
+    </section>
+    <!--=========== END COURSE BANNER SECTION ================-->
+{% endblock %}    

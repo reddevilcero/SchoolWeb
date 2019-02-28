@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+{% load  static %}
+{% block title %}Clubs{% endblock %}
+{% block container %}
+
+  <!--=========== BEGIN COURSE BANNER SECTION ================-->
+  <section id="imgBanner">
+    <h2>Our Club Offer</h2>
+  </section>
+  <!--=========== END COURSE BANNER SECTION ================-->
+
+  <!--=========== BEGIN COURSE BANNER SECTION ================-->
+  <section id="courseArchive">
+    <div class="container">
+      <div class="row">
+        <!-- start course content -->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="courseArchive_content">
+            <div class="row">
+            {% for club in club_list %}
+                <!-- start single course -->
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="single_course wow fadeInUp">
+                  <div class="singCourse_imgarea">
+                    <img src=
+                    {% if club.image %}
+                      {{club.image.url}}
+                    {% else %}
+                      {% static 'core/img/defaults/club.jpg' %}
+                    {% endif %} />
+                    <div class="mask">                         
+                      <a href={% url 'club_details' club.id club.name|slugify %} class="course_more">View Course</a>
+                    </div>
+                  </div>
+                  <div class="singCourse_content">
+                  <h3 class="singCourse_title"><a href="{% url 'club_details' club.id club.name|slugify %}">{{club.name}}</a></h3>
+                  <p class="singCourse_price">
+                  {% if club.price > 0 %}
+                    Standar <span>£{{club.price}}</span> Per Sesion | <a href="{% url 'club_details' club.id club.name|slugify %}">Other Prices</a></p>
+                  {% else %}
+                    <span>Free Club</span><a href="{% url 'club_details' club.id club.name|slugify %}"></a></p>
+                  {% endif %}
+                  
+                  <p>{{club.quick_description}}</p>
+                  </div>
+                  <div class="singCourse_author">
+                    <img src={{club.club_tutor.image.url}} alt="img">
+                    <h4 class="tutors_name">{{club.club_tutor.name}}</h4>
+                    <span >{{club.club_tutor.rol}}</span>
+                  </div>
+                </div>
+              </div>
+              <!-- End single course -->
+            {% endfor %}
+              
+            </div>
+          </div>
+        </div>
+        <!-- End course content -->
+      </div>
+    </div>
+  </section>
+  <!--=========== END COURSE BANNER SECTION ================-->
+{% endblock %}

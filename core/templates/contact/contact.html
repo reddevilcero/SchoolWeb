@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Contact{% endblock %}
+{% block container %}
+
+<!--=========== BEGIN COURSE BANNER SECTION ================-->
+<section id="imgBanner">
+  <h2>Contact</h2>
+</section>
+<!--=========== END COURSE BANNER SECTION ================-->
+
+<!--=========== BEGIN CONTACT SECTION ================-->
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12"> 
+        <div class="title_area">
+          <h2 class="title_two">We are here for you</h2>
+          <span></span> 
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        {% if 'ok' in request.GET %}
+            <p style='color:green;'><b>The message has been sent correctly, we will contact you shortly</b></p>
+        {% elif 'fail' in request.GET %}
+            <p style='color:red;'><b>Sorry, the message has not been sent, try again in a few seconds or use other contact methods.<b></p>
+        {% endif %}
+        <div class="contact_form wow fadeInLeft">
+          <form class="submitphoto_form" method='POST' action=''>
+          {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Submit" class="wpcf7-submit">
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="contact_address wow fadeInRight">
+          <h3>Address</h3>
+          <div class="address_group">
+            <p>Your Address here <br>Town, Postcode</p>
+            <p>Phone: Your Phone here</p>
+            <p>Email:contact@contact.com</p>
+          </div>
+          <div class="address_group">
+          <ul class="footer_social">
+            <li><a href="#" class="soc_tooltip" title="" data-placement="top" data-toggle="tooltip" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#" class="soc_tooltip" title="" data-placement="top" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#" class="soc_tooltip" title="" data-placement="top" data-toggle="tooltip" data-original-title="Google+"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#" class="soc_tooltip" title="" data-placement="top" data-toggle="tooltip" data-original-title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#" class="soc_tooltip" title="" data-placement="top" data-toggle="tooltip" data-original-title="Youtube"><i class="fa fa-youtube"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--=========== END CONTACT SECTION ================-->
+
+<!--=========== BEGIN GOOGLE MAP SECTION ================-->
+<section id="googleMap">
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38712.77645196803!2d-2.480075953422831!3d52.668131790695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870780b0d577243%3A0x9139ed82d06f8811!2sTelford!5e0!3m2!1sen!2suk!4v1551360941956" width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+</section>
+<!--=========== END GOOGLE MAP SECTION ================-->
+    
+{% endblock %}

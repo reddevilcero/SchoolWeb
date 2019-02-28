@@ -1,0 +1,83 @@
+{% extends "core/base.html" %}
+{% load  static %}
+{% block title %}Events{% endblock %}
+{% block container %}
+
+
+    <!--=========== BEGIN COURSE BANNER SECTION ================-->
+    <section id="imgBanner">
+      <h2>Events Archive</h2>
+    </section>
+    <!--=========== END COURSE BANNER SECTION ================-->
+    
+    <!--=========== BEGIN COURSE BANNER SECTION ================-->
+    <section id="courseArchive">
+      <div class="container">
+        <div class="row">
+          <!-- start course content -->
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="courseArchive_content">
+              <!-- start blog archive  -->
+              <div class="row">
+                
+                {% for event in list_events %}
+                    <!-- start single blog archive -->
+                    <div class="col-lg-12 col-12 col-sm-12">
+                    <div class="single_blog_archive wow fadeInUp">
+                        <div class="blogimg_container">
+                        <a href="{% url 'event' event.id event.title|slugify %}" class="blog_img">
+                            <img alt="img" src={{event.cover_image.url}}>
+                        </a>    
+                        </div>
+                        <h2 class="blog_title"><a href={% url 'event' event.id event.title|slugify %}>{{event.title}}</a></h2>
+                        <div class="blog_commentbox">
+                        <p><i class="fa fa-clock-o"></i>Time: {{event.time|date:"H:i D d M Y"}}</p>
+                        <p><i class="fa fa-map-marker"></i>Location: {{event.place}}|{{event.postcode}}</p>
+                        <p><a href={{event.link}} target="_blank">
+                        <img src="https://img.icons8.com/color/32/000000/google-maps.png" alt="Google Icon">
+                        </a></p>                   
+                        </div>
+                        <p class="blog_summary">{{event.content|safe|truncatewords:"30" }}...</p>
+                        <a class="blog_readmore" href={% url 'event' event.id event.title|slugify %}>Read More</a>
+                    </div>
+                    </div>
+                    <!-- End single blog archive -->
+                {% endfor %}
+              </div>
+              <!-- end blog archive  -->
+              <!-- start previous & next button -->
+              {% if is_paginated %}
+                <nav>
+                  <ul class="pagination wow fadeInLeft">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                      {% if posts.number == i %}
+                        <li class='active'><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if posts.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              {% endif %}
+            </div>
+          </div>
+          <!-- End course content -->
+
+         
+          {% include "includes/sidebar.html" %}
+        </div>
+      </div>
+    </section>
+    <!--=========== END COURSE BANNER SECTION ================-->
+
+{% endblock %}
