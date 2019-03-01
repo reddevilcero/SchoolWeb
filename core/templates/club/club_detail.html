@@ -53,7 +53,15 @@
                 <tr>          
                   <td><h2>{{club.name}}</h2></td>
                   <td><span class="singlecourse_author">
-                <img alt="img" src="{{club.club_tutor.image.url}}">
+                <img alt="img" src="{% if club.club_tutor.image %}
+                            {{club.club_tutor.image.url}}
+                        {% else %}
+                            {% if club.club_tutor.title == 'Mrs.' or club.club_tutor.title == 'Ms.' or club.club_tutor.title == 'Miss.' %}
+                               {% static 'core/img/defaults/female.svg' %} 
+                            {% else %}
+                                {% static 'core/img/defaults/male.svg' %} 
+                            {% endif %}
+                        {% endif %}">
                 {{club.club_tutor.name}}
               </span></td>
                   <td><b>{{club.start_time|time:"H:i" }} to {{club.finish_time|time:"H:i" }}</b></td>
@@ -91,7 +99,15 @@
                       <p>{{club.quick_description}}</p>
                     </div>
                     <div class="singCourse_author">
-                    <img src={{club.club_tutor.image.url}} alt="img">
+                    <img src="{% if club.club_tutor.image %}
+                            {{club.club_tutor.image.url}}
+                        {% else %}
+                            {% if club.club_tutor.title == 'Mrs.' or club.club_tutor.title == 'Ms.' or club.club_tutor.title == 'Miss.' %}
+                               {% static 'core/img/defaults/female.svg' %} 
+                            {% else %}
+                                {% static 'core/img/defaults/male.svg' %} 
+                            {% endif %}
+                        {% endif %}" alt="img">
                     <h4 class="tutors_name">{{club.club_tutor.name}}</h4>
                     <span >{{club.club_tutor.rol}}</span>
                   </div>
