@@ -30,4 +30,4 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 
     def get_success_url(self):
-            return reverse_lazy('contact')+'?ok'
+        return reverse_lazy('contact')+'?ok'
