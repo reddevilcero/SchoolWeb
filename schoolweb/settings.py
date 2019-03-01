@@ -25,7 +25,7 @@ SECRET_KEY = '4_(2^r8%syn^%4mvq(skqsvdfx#m5qja%!xo&-v6qi2+dbd9j5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['SchoolWebTelford.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
