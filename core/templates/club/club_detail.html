@@ -29,8 +29,8 @@
               <span class="singlecourse_price">
               {% if club.price > 0 %}
                 £ {{club.price}} Standard Price per session<br>
-                {% if club.price_reduced > 0 %}
-                  £ {{club.price_reduced}} Concession Price per session
+                {% if club.reduced_price > 0 %}
+                  £ {{club.reduced_price}} Concession Price per session
                 {% else %}
                   FREE per session for Concession Child
                 {% endif %}
