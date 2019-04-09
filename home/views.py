@@ -11,5 +11,5 @@ def home(request):
     clubs = Club.objects.all()
     return render(request, 'home/home.html',
                   {'tutors': tutors,
-                  'slides': slides,
-                  'clubs': clubs})
+                   'slides': slides,
+                   'clubs': clubs})
